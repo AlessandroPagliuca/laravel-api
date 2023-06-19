@@ -12,9 +12,10 @@ class ProjectController extends Controller
     {
         $projects = Project::with('type')->paginate(5);
         return response()->json([
-            'success' => true,
+            'status' => 'success',
+            'message' => 'ok',
             'results' => $projects
-        ]);
+        ], 200);
     }
 
     public function show($slug)
@@ -23,14 +24,15 @@ class ProjectController extends Controller
 
         if ($project) {
             return response()->json([
-                'success' => true,
+                'status' => 'success',
+                'message' => 'ok',
                 'results' => $project
-            ]);
+            ], 200);
         } else {
             return response()->json([
-                'success' => false,
-                'results' => 'Project not found !'
-            ]);
+                'status' => 'error',
+                'message' => 'Project not found !'
+            ], 404);
         }
 
 

@@ -13,7 +13,7 @@ class NewContact extends Mailable
 {
     use Queueable, SerializesModels;
 
-    //variabile per la view cotenente i dati della view
+
     public $lead;
 
     /**
@@ -21,7 +21,7 @@ class NewContact extends Mailable
      *
      * @return void
      */
-    public function __construct($_lead) // dati che vengono dal form
+    public function __construct($_lead)
     {
         $this->lead = $_lead;
     }
@@ -34,8 +34,8 @@ class NewContact extends Mailable
     public function envelope()
     {
         return new Envelope(
-            replyTo: $this->lead->address,
             subject: 'New Contact',
+            replyTo: $this->lead->address
         );
     }
 
@@ -47,7 +47,7 @@ class NewContact extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.contact',
+            view: 'mails.new-contact-mail'
         );
     }
 

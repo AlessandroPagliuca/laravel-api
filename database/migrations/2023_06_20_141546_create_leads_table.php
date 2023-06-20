@@ -12,8 +12,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('leads', function (Blueprint $table) {
-            $table->text('body')->after('name');
+        Schema::create('leads', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->text('message');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('leads', function (Blueprint $table) {
-            $table->dropColumn('body');
-        });
+        Schema::dropIfExists('leads');
     }
 };
